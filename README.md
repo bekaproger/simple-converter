@@ -4,6 +4,11 @@ How to install
 
 clone this repo
 
+rename .env.example to .env
+and set your database configurations
+
+run command php artisan migrate
+
 register as a user
 make post reques to /api/register provide name email password
 
