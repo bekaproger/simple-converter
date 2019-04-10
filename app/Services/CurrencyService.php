@@ -12,17 +12,34 @@ namespace App\Services;
 use App\Currency;
 use GuzzleHttp\Client;
 
+/**
+ * Class CurrencyService
+ * @package App\Services
+ */
 class CurrencyService
 {
 
+    /**
+     * @var Client
+     */
     protected $http;
+    /**
+     * @var string
+     */
     protected $url = 'http://www.cbr.ru/scripts/XML_daily.asp';
 
+    /**
+     * CurrencyService constructor.
+     * @param Client $client
+     */
     public function __construct(Client $client)
     {
         $this->http = $client;
     }
 
+    /**
+     * Main method - Update currencies
+     */
     public function update()
     {
         $xml = $this->getCurrencies();
@@ -40,6 +57,12 @@ class CurrencyService
         }
     }
 
+    /**
+     * Make float value from string separated by ','
+     *
+     * @param string $rate
+     * @return float
+     */
     protected function makeRate(string $rate)
     {
         $exploded = explode(',', $rate);
@@ -47,6 +70,11 @@ class CurrencyService
         return (float)implode('.', $exploded);
     }
 
+    /**
+     * Make request to provided url
+     *
+     * @return \SimpleXMLElement
+     */
     protected function getCurrencies()
     {
         $body = $this->http->get($this->url)->getBody();
