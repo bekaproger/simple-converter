@@ -4,6 +4,8 @@ How to install
 
 clone this repo
 
+run composer update 
+
 rename .env.example to .env
 and set your database configurations
 
